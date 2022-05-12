@@ -4,10 +4,12 @@ const {Sequelize, sequelize} = require('./db');
     // class Band extends Model{
         
     // }
+
 let Band;
 Band.init({
     name: DataType.String,
-    genre: DataType.ENUM('Rock', 'Pop', 'Hip hop', 'R & B')
+    genre: DataType.ENUM('Rock', 'Pop', 'Hip hop', 'R & B'),
+    showCount: DataType.Number
 },{
     sequelize
 });

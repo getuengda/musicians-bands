@@ -20,10 +20,24 @@ describe('Band and Musician Models', () => {
 
     test('Bands have a genre', async () => {
         const testBand = await Band.create({
-            name: 'Sun of Moo',
+            name: 'Son of Moo',
             genre: 'Hip Pop'
         })
         expect(testBand.genre).toBe('Hip Hop');
+    })
+
+    test('Bands can update name', async () => {
+        const testBand = await Band.update({
+            name: 'Son of Chaa',
+            genre: 'R & B'
+        })
+        expect(testBand.name).toBe('Son of Chaa');
+    })
+    test('Bands can Delete genre', async () => {
+        const testBand = await Band.destroy({
+            name: 'Son of Chaa',
+        })
+        expect(testBand.name).toBe('');
     })
 
     test('can create a Musician', async () => {
