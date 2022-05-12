@@ -8,7 +8,7 @@ const {Sequelize, sequelize} = require('./db');
 let Band;
 Band.init({
     name: DataType.String,
-    genre: DataType.ENUM('Rock', 'Pop', 'Hip hop', 'R & B'),
+    band: DataType.ENUM('Rock', 'Pop', 'Hip hop', 'R & B'),
     showCount: DataType.Number
 },{
     sequelize

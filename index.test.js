@@ -18,22 +18,22 @@ describe('Band and Musician Models', () => {
         expect(testBand.name).toBe('YKL');
     })
 
-    test('Bands have a genre', async () => {
+    test('Bands have multiple band', async () => {
         const testBand = await Band.create({
             name: 'Son of Moo',
-            genre: 'Hip Pop'
+            band: 'Hip Pop'
         })
-        expect(testBand.genre).toBe('Hip Hop');
+        expect(testBand.band).toBe('Hip Hop');
     })
 
     test('Bands can update name', async () => {
         const testBand = await Band.update({
             name: 'Son of Chaa',
-            genre: 'R & B'
+            band: 'R & B'
         })
         expect(testBand.name).toBe('Son of Chaa');
     })
-    test('Bands can Delete genre', async () => {
+    test('Bands can Delete bnad', async () => {
         const testBand = await Band.destroy({
             name: 'Son of Chaa',
         })
@@ -47,9 +47,28 @@ describe('Band and Musician Models', () => {
     })
     test('Musician can play insrument', async () => {
         
-        const testMusician = await Musician.create({
-            name: 'Sami Dan',
-            instrument: 'Mesenko'})
+        const testMusician = await Musician.create({name: 'Sami Dan', instrument: 'Mesenko'})
         expect(Musician.instrument).toBe('Mesenko');
+    })
+
+    test('Bands can have many musician', async () => {
+        
+        const testMusician = await Musician.create({
+            name: 'YKL', 
+            band: 'Mesenko'
+        })
+
+        const Tedyafro = await Musician.create({name: 'Tedyafro', instrumnet: 'Vocals'})
+        const SamMagna = await Musician.create({name: 'SamMagna', instrument: 'Guitar'})
+        const TedyMac = await Musician.create({name: 'TedyMac', instrument: 'Piano'})
+
+        await YKL.addMusician(Tedyafro) // AddMusician  is a magic Method to add 
+        await YKL.addMusician(SamMagna)
+        await YKL.addMusician(TedyMac)
+
+        const musician = await YKL.getMusician()
+        
+        expect(musician.length).toBe(3);
+        expect(musician[0] instanceof Musician).toBeTruthy;
     })
 })
