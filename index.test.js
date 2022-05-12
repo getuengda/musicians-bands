@@ -13,12 +13,29 @@ describe('Band and Musician Models', () => {
     })
 
     test('can create a Band', async () => {
-        // TODO - test creating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const testBand = await Band.create({
+            name: 'YKL'})
+        expect(testBand.name).toBe('YKL');
+    })
+
+    test('Bands have a genre', async () => {
+        const testBand = await Band.create({
+            name: 'Sun of Moo',
+            genre: 'Hip Pop'
+        })
+        expect(testBand.genre).toBe('Hip Hop');
     })
 
     test('can create a Musician', async () => {
-        // TODO - test creating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const testMusician = await Musician.create({
+            name: 'Konu'})
+        expect(Musician.name).toBe('Konu');
+    })
+    test('Musician can play insrument', async () => {
+        
+        const testMusician = await Musician.create({
+            name: 'Sami Dan',
+            instrument: 'Mesenko'})
+        expect(Musician.instrument).toBe('Mesenko');
     })
 })
