@@ -1,4 +1,5 @@
 // import {jest} from '@jest/globals';
+// const { INTEGER, NUMBER } = require('sequelize/types');
 const { sequelize, Sequelize, Model, DataTypes } = require('./db');
 const { Musician, Band, Song } = require('./index')
 const { index } = require('./index')
@@ -11,7 +12,7 @@ describe('Band and Musician Models', () => {
         // the 'sync' method will create tables based on the model class
         // by setting 'force:true' the tables are recreated each time the 
         // test suite is run
-        await sequelize.sync({ force: true });
+        await sequelize.sync({ force: true }); //{ alter: true }
         console.log("All models were synchronized successfully.");
     })
 
@@ -115,6 +116,70 @@ describe('Band and Musician Models', () => {
       expect(musicians.length).toBe(3);
       expect(musicians[0] instanceof Musician).toBeTruthy;
     })
+
+    // Test the new model by creating a new Song and making sure it has the correct properties
+         //Songs can create new song ----
+    test('Songs can create a song', async () => {
+        const newSong = await Song.create(
+            {   name: "Wollo",
+                song: "Tizita"           
+            },
+            {   name: "Wollo2",
+                song: "Anchihoyie"           
+            },
+            {
+                name: "Wollo3",
+                song: "Bati"  
+
+            })
+        expect(newSong.song).toBe("Tizita", "Anchihoyie", "Bati"); 
+    
+    })
+
+    // Find all songs
+    test('Find all songs', async () => {
+        const songs = await Song.findAll();
+        console.log(songs.every(song => song instanceof Song)); // true
+        console.log("All songs:", JSON.stringify(songs, null, 4));
+      }) 
+
+    //Add two songs for a band 
+            test('Songs can have all Band', async () => {
+                const Tegaru = await Song.create({
+                        name: 'Tegaru',
+                        song: 'Tizita'
+                    });
+
+                // const Axumi = await Song.create({
+                //         name: 'Axumi',
+                //         song: 'Engudayie'
+                //     });
+            
+                const Gozu = await Band.create({
+                    name: 'Gozu',
+                    genre: 'HipPop'
+                });
+
+                const Wanuu = await Band.create({
+                    name: 'Wanuu',
+                    genre: 'R&B'
+                });
+
+                const Mekido = await Band.create({
+                    name: 'Mekido',
+                    genre: 'Acordio'
+                });
+        
+                // await Tegaru.addBand(Gozu);
+                // await Tegaru.addBand(Wanuu);
+                // await Tegaru.addBand(Mekido);
+
+                // const bands = await Tegaru.getBands();
+                // expect(bands.length).toBe(3);
+                // expect(bands[0] instanceof Band).toBeTruthy;
+
+                
+            })
 
 
 //     test('can create a Musician', async () => {
