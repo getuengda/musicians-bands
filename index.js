@@ -1,19 +1,24 @@
-const {sequelize, DataTypes, Model} = require('./db');
+const {sequelize, Sequelize, Model, DataTypes} = require('./db');
 
-const {Band} = require('./Band')
-const {Musician} = require('./Musician')
+const { Band } = require('./Band')
+const { Musician } = require('./Musician');
+const { Song } = require('./Song');
 
-const sequelize = new Sequelize( {
-    dialect: 'sqlite',
-    storage: './db.sqlite'
-})
 
 //Create our Association!
 Musician.belongsTo(Band) //adds a foreign key on the musician table, for the band they belong to
 Band.hasMany(Musician) //gives us Sequelize magic methods
 
+//Create many-to-Many Association!
+//Multiple songs can be added to a Band
+//Multiple bands can have the same Song
+
+Song.belongsToMany(Band, {through: "song_band"});
+Band.belongsToMany(Song, {through: "song_band"});
+
 
 module.exports = {
     Band,
-    Musician
+    Musician,
+    Song
 };

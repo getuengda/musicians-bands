@@ -1,17 +1,11 @@
-const {Sequelize, sequelize} = require('./db');
+const {sequelize, Sequelize, Model, DataTypes} = require('./db');
 
 // TODO - define the Band model
-    // class Band extends Model{
-        
-    // }
 
-let Band;
-Band.init({
-    name: DataType.String,
-    band: DataType.ENUM('Rock', 'Pop', 'Hip hop', 'R & B'),
-    showCount: DataType.Number
-},{
-    sequelize
+let Band = sequelize.define('band', {
+    name: Sequelize.STRING,
+    genre: Sequelize.ENUM('Rock', 'Pop', 'Hip hop', 'R & B')
+    // showCount: Sequelize.Number
 });
 
 module.exports = {
