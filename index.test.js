@@ -50,6 +50,7 @@ describe('Band and Musician Models', () => {
     expect(updatedBand.name).toBe(undefined); // needs to be checked again????
     console.log(Band.name)
     })
+
     
     // test('Band can Delete band column', async () => {
     //     const testBand1 = await Band.create({
@@ -136,12 +137,13 @@ describe('Band and Musician Models', () => {
     
     })
 
-    // Find all songs
+    // Find songs can search or include all bands joined
     test('Find all songs', async () => {
         const songs = await Song.findAll();
         console.log(songs.every(song => song instanceof Song)); // true
         console.log("All songs:", JSON.stringify(songs, null, 4));
       }) 
+    
 
     //Add two songs for a band 
             test('Songs can have all Band', async () => {
@@ -180,7 +182,7 @@ describe('Band and Musician Models', () => {
 
                 
             })
-
+       
 
 //     test('can create a Musician', async () => {
 //         const testMusician = await Musician.create({
